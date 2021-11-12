@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+   
+</head>
+<body>
+   <h1>Vaccination System</h1> 
+   <div id="vacc_1">
+    <div>
+        <input  id="name"type="text" placeholder="Enter Name">
+        <input  id="number"type="number" placeholder=" Enter Number">
+        <button id="btn" onclick="RequestVacc()">Register</button>
+    </div>      
+    <div>
+        <div id="pic"></div>
+        <div id="vac"></div>
+    </div> 
+   </div>
+</body>
+</html>
+<script>
+let query = ["Saktiman","Babu","Shyam","Raju","Sinchen","Jiyan","Ram","Jethalal","Motaset","Vavita"]
+var vaccines = Math.floor(Math.random()*20)
+var peoples = document.getElementById("pic");
+var vac = document.getElementById("vac");
+var interval;
+
+function RequestVacc(){
+    var name = document.getElementById("name").value;
+    var age = document.getElementById("number").value;
+    peoples.textContent = "persons in Queue" + query.length;
+    if(name == "" || age == ""){
+    console.log(name,age)
+    alert("please enter name and age");
+    } else {
+        query.push(name);
+        let msg  = name +"your registration succesfull now go stand!"
+        alert(msg);
+    }
+     vac.textContent="Vaccines Available" + vaccines;
+     interval = setInterval(startVaccination, 2000)
+     let mypromise = new Promise(function(resolve, reject){
+         setInterval(function(){
+             if (query[0] == name && vaccines > 0 && + age<=60){
+                 resolve(name+"its your turn!")
+             } else if (+age > 60 && vaccines > 0 ){
+                 resolve(name+"its your turn!")
+             }
+         },1000)
+     })
+     mypromise.then(function(res){
+         clearInterval(interval);
+         alert(res);
+     })
+}
+function startVaccination(){
+    query.shift();
+    vaccines--;
+    vac.textContent = "vaccines avilable" + vaccines;
+    peoples.textContent = "persons in queue" + query.length
+    if(vaccines <= 0 || query.length == 0){
+        clearInterval(interval)
+        alert("vaccines out of stock, visit tomorrow")
+    }
+} 
+</script>

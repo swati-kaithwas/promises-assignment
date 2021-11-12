@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+           
+            background-image:"https://cdn2.f-cdn.com/contestentries/1476645/32188263/5c7d1750c9de4_thumb900.jpg";
+            background-size: cover;
+            
+            
+        }
+        #h1{
+            color: rgb(247, 18, 18);
+            background-color: rgb(238, 216, 16);
+            text-align: center;
+            width: 50%;
+            margin: auto;
+        }
+        #box{
+            width: 100%;
+            display: grid;
+            grid-template-columns: 100%; 
+            background-color: rgb(219, 180, 180);
+        
+        }
+        #cont div,
+        button ,h2{
+            display: flex;
+            margin: 2%;
+            margin-left: 30%;
+        }
+        #items {
+            display: grid;
+            width: 100% ;
+            margin: auto;
+            grid-template-columns: 25% 25% 25% 25%;
+            justify-content: left;
+            grid-gap: 10px;
+            
+        }
+        img {
+            width: 70%;
+            height: 100%;
+        }
+        #order {
+            margin-top: 30px;
+            text-align: left;
+            
+        }
+        #order div {
+            font-size: larger;
+        }
+
+    </style>
+</head>
+<body>
+    <h1 id="h1"><strong>McDonald's</strong>Fast food company</h1>
+<div id="box">
+    <div id="b1">
+        <div id="cont">
+            <h2>Select Food</h2>
+            <div><input type="checkbox" name="#" id="ve"><label for="ve"> Veg meals</label></div>
+            <div><input type="checkbox" name="#" id="burg"><label for="burg">Burger</label></div>
+            <div><input type="checkbox" name="#" id="coff"><label for="coff">Cold Coffee</label></div>
+            <div><input type="checkbox" name="#" id="fri"><label for="fri"> french fries</label></div>
+            <div><input type="checkbox" name="#" id="mea"><label for="mea">meals of the day</label></div>
+            <button onclick="Foodorder()">Order Food</button>
+        </div>
+    </div>
+    <div id="b2">
+        <div id="order">
+            <div id="orderid"></div>
+        </div> 
+        <h1> food display:</h1>
+        <div id="items">
+        </div>
+    </div>
+</div>
+  
+</body>
+<script>
+    async function Foodorder() {
+        
+        let burger = document.getElementById("burg");
+        let coffee = document.getElementById("coff");
+        let fries = document.getElementById("fri");
+        let meals = document.getElementById("mea");
+        let veg = document.getElementById("ve");
+        let items = document.getElementById("items");
+        let orderid= document.getElementById("orderid");
+        let orderId1 = Math.floor(Math.random()*100);
+        orderid.textContent = " Order Id: " + orderId1;
+        let promise = new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                if (burger.checked == true || coffee.checked == true || fries.checked == true||meals.checked==true ||veg.checked==true) {
+                    resolve('Take your order!')
+                }
+            }, 5000)
+        })
+        let res = await promise;
+
+        alert(res);
+        if (burger.checked == true) {
+
+            let image = document.createElement("img");
+            image.src = "data:image/jpeg;base64,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";
+            items.append(image);
+        }
+        if (coffee.checked == true) {
+            let image = document.createElement("img");
+            image.src = "https://media-cdn.tripadvisor.com/media/photo-s/15/5f/ee/c9/best-cold-coffee-in-indore.jpg";
+            items.append(image);
+        }
+        if (fries.checked == true) {
+            let image = document.createElement("img");
+            image.src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFb2g1zDHMZeLb3yIWVBVh1P6Q-T_-OuVY9IAxV4XrzviTzqBPkGtWwB1YAcuG1ftD2r0&usqp=CAU"
+            items.append(image);
+        }
+        if (meals.checked == true) {
+            let image = document.createElement("img");
+            image.src = "https://www.aucklandairport.co.nz/-/media/Images/Traveller/Retail/Eat-and-Relax/Restaurant-main-images/McDonalds5.ashx"
+            items.append(image);
+        }
+        if (veg.checked == true) {
+            let image = document.createElement("img");
+            image.src = "https://b.zmtcdn.com/data/pictures/0/800510/cc05a523ff0cbf188818b5eefca01d13.jpg?fit=around|771.75:416.25&crop=771.75:416.25;*,*"
+            items.append(image);
+        }
+    }
+</script>
+</html>
